@@ -7,6 +7,9 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.util.Log;
+
+import static android.support.constraint.Constraints.TAG;
 
 
 @Database(entities = Petition.class, version = 1, exportSchema = false)
@@ -49,10 +52,8 @@ public abstract class PetitionRoomDatabase extends RoomDatabase{
         @Override
         protected Void doInBackground(Void... voids) {
             petitionDAO.deleteAll();
-
-            Petition petition = new Petition("First petition");
-            petitionDAO.insert(petition);
-            petition = new Petition("Second ApplicationPOJO");
+            Log.d(TAG, "doInBackground: " + petitionDAO.getAllPetitions().toString());
+            Petition petition = new Petition(petitionDAO.getAllPetitions().toString());
             petitionDAO.insert(petition);
             return null;
         }

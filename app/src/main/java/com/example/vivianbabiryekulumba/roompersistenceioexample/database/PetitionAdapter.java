@@ -25,7 +25,7 @@ public class PetitionAdapter extends RecyclerView.Adapter<PetitionViewHolder> {
     @NonNull
     @Override
     public PetitionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = layoutInflater.inflate(R.layout.activity_recycler_petiton, parent, false);
+        View view = layoutInflater.inflate(R.layout.recycler_petition_itemview, parent, false);
         return new PetitionViewHolder(view);
     }
 
@@ -33,6 +33,9 @@ public class PetitionAdapter extends RecyclerView.Adapter<PetitionViewHolder> {
     public void onBindViewHolder(@NonNull PetitionViewHolder holder, int position) {
         holder.onBind(petitionsList.get(position));
         Log.d(TAG, "onBindViewHolder: ran" + petitionsList.size());
+        for(int i = 0; i < petitionsList.size(); i++){
+            Log.d(TAG, "onBindViewHolder: currently at " + petitionsList.get(i));
+        }
     }
 
     public void setPetitionsList(List<Petition> petitions){

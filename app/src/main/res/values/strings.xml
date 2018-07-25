@@ -13,7 +13,8 @@
     <string name="submit_petition">submit petition</string>
     <string name="save_petition">save petition</string>
     <string name="begin_typing_petition">Begin typing petition</string>
-    <string name="view_petition">view petition</string>
     <string name="seeApps">See your applications</string>
     <string name="submitPet">Submit a new petition</string>
+    <string name="view_petition">view petition</string>
+    <string name="delete">delete</string>
 </resources>
