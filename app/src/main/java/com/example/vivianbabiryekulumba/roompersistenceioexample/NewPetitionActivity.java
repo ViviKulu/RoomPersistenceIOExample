@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.vivianbabiryekulumba.roompersistenceioexample.database.Petition;
+import com.example.vivianbabiryekulumba.roompersistenceioexample.database.PetitionDAO;
 import com.example.vivianbabiryekulumba.roompersistenceioexample.database.PetitionRepository;
 
 import java.io.FileOutputStream;
@@ -22,8 +23,10 @@ public class NewPetitionActivity extends AppCompatActivity {
     Button submitBtn;
     Button saveBtn;
     Button viewBtn;
+    Button deleteBtn;
     Petition petition;
     PetitionRepository petitionRepository;
+    PetitionDAO petitionDAO;
     String petitionData;
     String file = "petition.txt";
     private String TAG = "NewActivity.class";
@@ -33,11 +36,10 @@ public class NewPetitionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_petition);
 
-        editText = findViewById(R.id.type_petition);
-
-        submitBtn = findViewById(R.id.button_submit);
-        saveBtn = findViewById(R.id.button_save);
-        viewBtn = findViewById(R.id.button_view);
+        editText = findViewById(R.id.type_announce);
+        submitBtn = findViewById(R.id.submit);
+        saveBtn = findViewById(R.id.save);
+        viewBtn = findViewById(R.id.view);
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +65,7 @@ public class NewPetitionActivity extends AppCompatActivity {
                 petitionRepository = new PetitionRepository(getApplication());
                 petitionRepository.insert(petition);
                 Log.d(TAG, "onClick: " + petition);
+                Log.d(TAG, "onClick: " + petitionData);
                 Toast.makeText(getApplicationContext(), "Petition saved to database!", Toast.LENGTH_SHORT).show();
             }
         });

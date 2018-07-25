@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,25 +24,30 @@ import java.util.List;
 public class RecyclerPetitionActivity extends AppCompatActivity {
 
     public static final int NEW_PETITION_ACTIVITY_REQUEST_CODE = 1;
+    private static final String TAG = "RecyclerActivity";
     PetitionViewModel petitionViewModel;
+    PetitionAdapter petitionAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_petiton);
 
-        RecyclerView petitions_recycler = findViewById(R.id.recyclerview);
-        final PetitionAdapter petitionAdapter = new PetitionAdapter(this);
-        petitions_recycler.setAdapter(petitionAdapter);
-        petitions_recycler.setLayoutManager(new LinearLayoutManager(this));
-
         petitionViewModel = ViewModelProviders.of(this).get(PetitionViewModel.class);
         petitionViewModel.getAllPetitions().observe(this, new Observer<List<Petition>>() {
             @Override
             public void onChanged(@Nullable List<Petition> petitions) {
                 petitionAdapter.setPetitionsList(petitions);
+                Log.d(TAG, "onChanged: petitions " + petitionViewModel.getAllPetitions());
             }
         });
+
+
+        RecyclerView petitions_recycler = findViewById(R.id.recyclerview);
+        petitionAdapter = new PetitionAdapter(this);
+        petitions_recycler.setAdapter(petitionAdapter);
+        petitions_recycler.setLayoutManager(new LinearLayoutManager(this));
+        Log.d(TAG, "onCreate: adapter set " + petitionAdapter);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +58,6 @@ public class RecyclerPetitionActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
     @Override
